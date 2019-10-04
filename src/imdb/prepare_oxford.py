@@ -218,12 +218,13 @@ def main():
 
             # result array to be saved
             
-            # result shape [ pgm_width, pgm_height, x,y,z, range, label]
-            result = np.zeros((pgm_height,pgm_width, 5), dtype=np.float)
+            # result shape [ pgm_width, pgm_height, x,y,z, intensity, range, label]
+            result = np.zeros((pgm_height,pgm_width, 6), dtype=np.float)
 
             result[pgm_elevation,pgm_azimuth,:3] = lidar_scan_data
-            result[pgm_elevation,pgm_azimuth,3] = depth
-            result[pgm_elevation,pgm_azimuth,4] = lidar_labels_data.squeeze()
+            result[pgm_elevation,pgm_azimuth,3] = 0 #intensity = 0
+            result[pgm_elevation,pgm_azimuth,4] = depth
+            result[pgm_elevation,pgm_azimuth,5] = lidar_labels_data.squeeze()
 
             
             #save file

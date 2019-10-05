@@ -57,10 +57,12 @@ def train():
         'Selected neural net architecture not supported: {}'.format(FLAGS.net)
 
     if FLAGS.net == 'squeezeSeg':
-      mc = kitti_squeezeSeg_config()
+      mc = oxford_squeezeSeg_config() 
       mc.TRAINING = True
       mc.PRETRAINED_MODEL_PATH = FLAGS.pretrained_model_path
       model = SqueezeSeg(mc)
+    
+
 
     imdb = kitti(FLAGS.image_set, FLAGS.data_path, mc)
 

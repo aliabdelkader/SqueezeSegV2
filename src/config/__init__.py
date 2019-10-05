@@ -1,1 +1,2 @@
 from kitti_squeezeSeg_config import kitti_squeezeSeg_config
+from oxford_squeezeSeg_config import oxford_squeezeSeg_config

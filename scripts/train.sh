@@ -1,62 +1,62 @@
 #!/bin/bash
 
-export GPUID=0
+# if [ $# -eq 0 ]
+# then
+#   echo "Usage: ./scripts/train.sh [options]"
+#   echo " "
+#   echo "options:"
+#   echo "-h, --help                show brief help"
+#   echo "-gpu                      gpu id"
+#   echo "-image_set                (train|val)"
+#   echo "-log_dir                  Where to save logs."
+#   echo "-steps                    Number of training steps."
+#   exit 0
+# fi
+
+# while test $# -gt 0; do
+#   case "$1" in
+#     -h|--help)
+#       echo "Usage: ./scripts/train.sh [options]"
+#       echo " "
+#       echo "options:"
+#       echo "-h, --help                show brief help"
+#       echo "-gpu                      gpu id"
+#       echo "-image_set                (train|val)"
+#       echo "-log_dir                  Where to save logs."
+#       echo "-steps                    Number of training steps."
+#       exit 0
+#       ;;
+#     -gpu)
+#       export GPUID="$2"
+#       shift
+#       shift
+#       ;;
+#     -image_set)
+#       export IMAGE_SET="$2"
+#       shift
+#       shift
+#       ;;
+#     -log_dir)
+#       export LOG_DIR="$2"
+#       shift
+#       shift
+#       ;;
+#     -steps)
+#       export STEPS="$2"
+#       shift
+#       shift
+#       ;;
+#     *)
+#       break
+#       ;;
+#   esac
+# done
+
+export GPUID=0,1
 export NET="squeezeSeg"
 export IMAGE_SET="train"
 export LOG_DIR="./log/"
 export STEPS=50000
-
-if [ $# -eq 0 ]
-then
-  echo "Usage: ./scripts/train.sh [options]"
-  echo " "
-  echo "options:"
-  echo "-h, --help                show brief help"
-  echo "-gpu                      gpu id"
-  echo "-image_set                (train|val)"
-  echo "-log_dir                  Where to save logs."
-  echo "-steps                    Number of training steps."
-  exit 0
-fi
-
-while test $# -gt 0; do
-  case "$1" in
-    -h|--help)
-      echo "Usage: ./scripts/train.sh [options]"
-      echo " "
-      echo "options:"
-      echo "-h, --help                show brief help"
-      echo "-gpu                      gpu id"
-      echo "-image_set                (train|val)"
-      echo "-log_dir                  Where to save logs."
-      echo "-steps                    Number of training steps."
-      exit 0
-      ;;
-    -gpu)
-      export GPUID="$2"
-      shift
-      shift
-      ;;
-    -image_set)
-      export IMAGE_SET="$2"
-      shift
-      shift
-      ;;
-    -log_dir)
-      export LOG_DIR="$2"
-      shift
-      shift
-      ;;
-    -steps)
-      export STEPS="$2"
-      shift
-      shift
-      ;;
-    *)
-      break
-      ;;
-  esac
-done
 
 logdir="$LOG_DIR/"
 
@@ -68,6 +68,6 @@ python ./src/train.py \
   --train_dir="$logdir/train" \
   --net=$NET \
   --max_steps=$STEPS \
-  --summary_step=100 \
+  --summary_step=10 \
   --checkpoint_step=100 \
   --gpu=$GPUID

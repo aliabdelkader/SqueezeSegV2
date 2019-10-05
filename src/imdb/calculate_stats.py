@@ -7,6 +7,32 @@ from tqdm import tqdm
 import numpy as np
 import argparse
 
+semantic_colors_dict = {
+      'road'          : [128, 64,128],
+      'sidewalk'      : [244, 35,232],
+      'building'      : [ 70, 70, 70],
+      'wall'          : [102,102,156],
+      'fence'         : [190,153,153],
+      'pole'          : [153,153,153],
+      'traffic_light' : [250,170, 30],
+      'traffic_sign'  : [220,220,  0],
+      'vegetation'    : [107,142, 35],
+      'terrain'       : [152,251,152],
+      'sky'           : [ 70,130,180],
+      'person'        : [220, 20, 60],
+      'rider'         : [255,  0,  0],
+      'car'           : [  0,  0,142],
+      'truck'         : [  0,  0, 70],
+      'bus'           : [  0, 60,100],
+      'train'         : [  0, 80,100],
+      'motorcycle'    : [  0,  0,230],
+      'bicycle'       : [119, 11, 32],
+      'void'          : [  0,  0,  0],
+      'outside_camera': [255, 255, 0],
+      'egocar'        : [123, 88,  4],
+      #'unlabelled'    : [ 81,  0, 81]
+}
+
 
 def main():
   parser = argparse.ArgumentParser(description='calculate mean and std for oxford')
@@ -65,6 +91,18 @@ def main():
 
   range_std = np.std(lidar_scans[:,:,:,4])
   print("range std {}".format(range_std))
+
+  print("############# labels freq #############################3")
+
+  labels = lidar_scans[:,:,:,5]
+  
+  uniqueValues, occurCount = np.unique(labels.reshape(-1), return_counts=True)
+  freq = list(zip(uniqueValues,occurCount))
+  freq = sorted(freq, key=lambda x: x[1],reverse=True)
+  keys = list(semantic_colors_dict.keys())
+  for clss_idx,count in freq:
+    class_name = keys[int(clss_idx)]
+    print("{}: {}".format(class_name,count))
 
   return None
 

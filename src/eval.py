@@ -39,6 +39,7 @@ tf.app.flags.DEFINE_string('net', 'squeezeSeg',
                            """Neural net architecture.""")
 tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
 
+ckpts = set()
 
 def eval_once(
     saver, ckpt_path, summary_writer, eval_summary_ops, eval_summary_phs, imdb,
@@ -165,7 +166,7 @@ def evaluate():
         'Selected neural net architecture not supported: {}'.format(FLAGS.net)
 
     if FLAGS.net == 'squeezeSeg':
-      mc = kitti_squeezeSeg_config()
+      mc = oxford_squeezeSeg_config()
       mc.TRAINING = False
       mc.LOAD_PRETRAINED_MODEL = False
       mc.DATA_AUGMENTATION = False

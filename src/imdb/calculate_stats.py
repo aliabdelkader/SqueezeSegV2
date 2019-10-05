@@ -2,7 +2,7 @@ try:
   from pathlib import Path
 except ImportError:
   from pathlib2 import Path  # python 2 backport
-
+import pandas as pd
 from tqdm import tqdm
 import numpy as np
 import argparse
@@ -50,6 +50,11 @@ def main():
   pgm_height = int(args.pgm_height)
   pgm_width = int(args.pgm_width)
   channels = int(args.channels)
+
+  validation_dir = "validation"
+
+  validation_dir = Path(validation_dir)
+  validation_dir.mkdir(parents=True, exist_ok=True)
   # find scans
   lidar_scans_files = list(data_path.glob("*.npy"))
 
@@ -58,6 +63,13 @@ def main():
   for idx, lidar_scan_file in tqdm(enumerate(lidar_scans_files),"loading lidar files"):
       lidar_scan = np.load(str(lidar_scan_file))
       lidar_scans[idx] = lidar_scan
+      # print(type(lidar_scan_file.stem))
+      np.set_printoptions(threshold=np.inf, linewidth=np.inf)  # turn off summarization, line-wrapping
+      with open(str(validation_dir / (lidar_scan_file.stem + ".csv")), 'w') as f:
+          f.write(np.array2string(lidar_scan, separator=', ').replace("[","").replace("]",""))
+      # lidar = pd.DataFrame(lidar_scan, columns=['x','y','z','intensity','depth','label'])
+      # lidar.to_csv(str(validation_dir / (lidar_scan_file.stem + ".csv")),header=False,index=False)
+      # # np.savetxt(str(validation_dir / (lidar_scan_file.stem + ".csv")),lidar_scan,delimiter=",")
 
   ### get means
   x_mean = np.mean(lidar_scans[:,:,:,0])

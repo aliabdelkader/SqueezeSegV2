@@ -154,8 +154,8 @@ def spherical_projection(lidar_data, pgm_height= 4, pgm_width= 360, invert_z_axi
     azimuth_norm,elevation_norm = normalize(azimuth),normalize(elevation)
 
     # set points range to be inside desired width and height of pgm
-    pgm_azimuth =  np.floor(azimuth_norm*(pgm_width-1)).astype(int), #[0, pgm_width-1]
-    pgm_elevation = np.floor(elevation_norm*(pgm_height-1)).astype(int) #[0, pgm_height-1]
+    pgm_azimuth =  np.rint(azimuth_norm*(pgm_width-1)).astype(int), #[0, pgm_width-1]
+    pgm_elevation = np.rint(elevation_norm*(pgm_height-1)).astype(int) #[0, pgm_height-1]
 
     return pgm_azimuth, pgm_elevation, depth
 

@@ -16,6 +16,7 @@ def oxford_squeezeSeg_config():
   mc.LOAD_PRETRAINED_MODEL = True
 
   semantic_colors_dict = {
+        'void'          : [  0,  0,  0],
         'road'          : [128, 64,128],
         'sidewalk'      : [244, 35,232],
         'building'      : [ 70, 70, 70],
@@ -35,9 +36,8 @@ def oxford_squeezeSeg_config():
         'train'         : [  0, 80,100],
         'motorcycle'    : [  0,  0,230],
         'bicycle'       : [119, 11, 32],
-        'void'          : [  0,  0,  0],
-        'outside_camera': [255, 255, 0],
-        'egocar'        : [123, 88,  4],
+        # 'outside_camera': [255, 255, 0],
+        # 'egocar'        : [123, 88,  4],
         #'unlabelled'    : [ 81,  0, 81]
 	}
 
@@ -82,21 +82,20 @@ def oxford_squeezeSeg_config():
 
   # run calculate_stats to get this data
 
-  
-# x mean 7.24533976482
-# y mean 0.452658387756
-# z mean 0.0374274338247
+# x mean 0.0829980246484
+# y mean 0.00496859145238
+# z mean 0.00413414090863
 # intensity mean 0.0
-# range mean 7.97056021518
-# x std 14.5127064397
-# y std 5.25185277249
-# z std 0.947047562264
-# intensity std 0.0 
-# range std 15.1085711908
+# range mean 0.0948401447068
+# x std 1.22129704996
+# y std 0.590271410875
+# z std 0.0734143687346
+# intensity std 0.0
+# range std 1.3576863737
 
 # intensity set to 1e-5 to avoid divide by zero
   
-  mc.INPUT_MEAN         = np.array([[[7.24, 0.45, 0.03, 1e-5, 7.97]]])
-  mc.INPUT_STD          = np.array([[[14.51,5.25, 0.94, 1e-5, 15.10]]])
+  mc.INPUT_MEAN         = np.array([[[0.83, 0.005, 0.004, 1e-5, 0.09]]])
+  mc.INPUT_STD          = np.array([[[1.22,0.59, 0.073, 1e-5, 1.357]]])
 
   return mc

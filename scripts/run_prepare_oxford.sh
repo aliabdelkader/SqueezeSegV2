@@ -14,7 +14,7 @@ export PGM_HEIGHT="64"
  export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
  export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 
- python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
+ python -m pdb "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
 
  # chunk 2
 

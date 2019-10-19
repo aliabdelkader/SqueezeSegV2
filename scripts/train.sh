@@ -52,7 +52,7 @@
 #   esac
 # done
 
-export GPUID=0,1
+export GPUID=0
 export NET="squeezeSeg"
 export IMAGE_SET="train"
 export LOG_DIR="./log/"

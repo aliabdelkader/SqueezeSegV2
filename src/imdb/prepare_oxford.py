@@ -45,7 +45,7 @@ label_map = {
     18: 19,  # 'bicycle': [119, 11, 32],
     19: 0,  # 'void': [0, 0, 0],
     20: 0,  # 'outside camera': [255, 255, 0],
-    # 21: 0, #'egocar': [123, 88, 4],
+    21: 0, #'egocar': [123, 88, 4],
 }
 
 def find_all_scans(dataset_dir):
@@ -270,13 +270,13 @@ def main():
             # result shape [ pgm_width, pgm_height, x,y,z, intensity, range, label]
             result = np.zeros((pgm_height, pgm_width, 6), dtype=np.float)
 
-            for idx in range(lidar_scan_data.shape[0], 6):
+            for idx in range(lidar_scan_data.shape[0]):
                 pgm_azimuth_idx = pgm_azimuth[idx]
                 pgm_elevation_idx = pgm_elevation[idx]
-                result[pgm_azimuth_idx, pgm_elevation_idx, :3] = lidar_scan_data[idx, :3]
-                result[pgm_azimuth_idx, pgm_elevation_idx, 3] = 0  # intensity = 0
-                result[pgm_azimuth_idx, pgm_elevation_idx, 4] = depth[idx]
-                result[pgm_azimuth_idx, pgm_elevation_idx, 5] = convert_ground_truth(lidar_labels_data[idx])
+                result[pgm_elevation_idx, pgm_azimuth_idx, :3] = lidar_scan_data[idx, :3]
+                result[pgm_elevation_idx, pgm_azimuth_idx, 3] = 0  # intensity = 0
+                result[pgm_elevation_idx, pgm_azimuth_idx, 4] = depth[idx]
+                result[pgm_elevation_idx, pgm_azimuth_idx, 5] = convert_ground_truth(lidar_labels_data[idx][0])
 
             # save file
             outfile = str(output_dir / scan_num) + ".npy"

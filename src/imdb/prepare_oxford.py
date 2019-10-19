@@ -260,7 +260,7 @@ def main():
             lidar_labels_path = root_dataset_dir / FOLDERS["labels_folder"] / (scan_num + FOLDERS_EXT["labels_folder"])
             lidar_labels_data = read_lidar_labels(lidar_labels_path)
 
-            pgm_azimuth_idx, pgm_elevation_idx, depth = get_pgm_index(lidar_data=lidar_scan_data,
+            pgm_azimuth, pgm_elevation, depth = get_pgm_index(lidar_data=lidar_scan_data,
                                                                       pgm_height=pgm_height,
                                                                       pgm_width=pgm_width,
                                                                       vertical_field_view=(-1.5, 1.5),
@@ -271,10 +271,12 @@ def main():
             result = np.zeros((pgm_height, pgm_width, 6), dtype=np.float)
 
             for idx in range(lidar_scan_data.shape[0], 6):
-                result[idx, :3] = lidar_scan_data[idx, :3]
-                result[idx, 3] = 0  # intensity = 0
-                result[idx, 4] = depth[idx]
-                result[idx, 5] = convert_ground_truth(lidar_labels_data[idx])
+                pgm_azimuth_idx = pgm_azimuth[idx]
+                pgm_elevation_idx = pgm_elevation[idx]
+                result[pgm_azimuth_idx, pgm_elevation_idx, :3] = lidar_scan_data[idx, :3]
+                result[pgm_azimuth_idx, pgm_elevation_idx, 3] = 0  # intensity = 0
+                result[pgm_azimuth_idx, pgm_elevation_idx, 4] = depth[idx]
+                result[pgm_azimuth_idx, pgm_elevation_idx, 5] = convert_ground_truth(lidar_labels_data[idx])
 
             # save file
             outfile = str(output_dir / scan_num) + ".npy"

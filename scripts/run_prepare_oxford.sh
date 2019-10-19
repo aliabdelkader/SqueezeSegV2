@@ -39,7 +39,7 @@ python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTP
 
 
 # # chunk 4
-OUTPUT_DATA_DIR
+# OUTPUT_DATA_DIR
 # # echo "chunk 4"
 # # export CHUNK_NUM="2014-06-25-16-22-15"
 # # export INCLUDE_INDEX="100"

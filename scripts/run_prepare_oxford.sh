@@ -10,7 +10,7 @@ export PGM_HEIGHT="64"
  # chunk 1
  echo "chunk 1"
  export CHUNK_NUM="2014-06-24-14-20-41"
- export INCLUDE_INDEX="100"
+ export INCLUDE_INDEX="0"
  export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
  export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 
@@ -20,7 +20,7 @@ export PGM_HEIGHT="64"
 
  echo "chunk 2"
  export CHUNK_NUM="2014-05-14-13-59-05"
- export INCLUDE_INDEX="123"
+ export INCLUDE_INDEX="0"
  export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
  export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 
@@ -31,7 +31,7 @@ export PGM_HEIGHT="64"
 
 echo "chunk 3"
 export CHUNK_NUM="2014-05-06-13-14-58"
-export INCLUDE_INDEX="100"
+export INCLUDE_INDEX="0"
 export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
 export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 

@@ -39,7 +39,7 @@ python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTP
 
 
 # # chunk 4
-
+OUTPUT_DATA_DIR
 # # echo "chunk 4"
 # # export CHUNK_NUM="2014-06-25-16-22-15"
 # # export INCLUDE_INDEX="100"
@@ -48,6 +48,6 @@ python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTP
 
 # # python prepare_oxford.py  --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}"
 
- python "${CREATE_IMAGESET}" --dataset_files "${OUTPUT_DATA_DIR}" --output_dir "data" --train_chunks "2014-06-24-14-20-41,2014-05-06-13-14-58" --val_chunks "2014-05-14-13-59-05"
+python "${CREATE_IMAGESET}" --dataset_files "${OUTPUT_DATA_DIR}" --output_dir "data" --train_chunks "2014-06-24-14-20-41,2014-05-06-13-14-58" --val_chunks "2014-05-14-13-59-05"
 # "data/lidar_2d"
 python src/imdb/calculate_stats.py --lidar_files "${OUTPUT_DIR}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}" --channels "6"

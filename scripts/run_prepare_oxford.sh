@@ -4,27 +4,27 @@ export PREPARE_OXFORD="src/imdb/prepare_oxford.py"
 export CREATE_IMAGESET="src/imdb/create_imageset.py"
 export OUTPUT_DATA_DIR="data/data"
 
-export PGM_WIDTH="360" # sick HFoV: 85, angular resolution: 0.125, 85/0.125 = 360
+export PGM_WIDTH="512" # sick HFoV: 85, angular resolution: 0.125, 85/0.125 = 360
 export PGM_HEIGHT="64"
 
-# # chunk 1
-# echo "chunk 1"
-# export CHUNK_NUM="2014-06-24-14-20-41"
-# export INCLUDE_INDEX="100"
-# export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
-# export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
+ # chunk 1
+ echo "chunk 1"
+ export CHUNK_NUM="2014-06-24-14-20-41"
+ export INCLUDE_INDEX="100"
+ export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
+ export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 
-# python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
+ python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
 
-# # chunk 2
+ # chunk 2
 
-# echo "chunk 2"
-# export CHUNK_NUM="2014-05-14-13-59-05"
-# export INCLUDE_INDEX="123"
-# export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
-# export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
+ echo "chunk 2"
+ export CHUNK_NUM="2014-05-14-13-59-05"
+ export INCLUDE_INDEX="123"
+ export DATASET_DIR="${BASE_DIR}/${CHUNK_NUM}"
+ export OUTPUT_DIR="${OUTPUT_DATA_DIR}/${CHUNK_NUM}"
 
-# python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
+ python "${PREPARE_OXFORD}" --dataset_files "${DATASET_DIR}" --output_dir "${OUTPUT_DIR}" --include "${INCLUDE_INDEX}" --pgm_height "${PGM_HEIGHT}" --pgm_width "${PGM_WIDTH}"
 
 
 # chunk 3

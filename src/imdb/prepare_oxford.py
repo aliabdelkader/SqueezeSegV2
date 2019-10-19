@@ -264,7 +264,7 @@ def main():
                                                                       pgm_height=pgm_height,
                                                                       pgm_width=pgm_width,
                                                                       vertical_field_view=(-1.5, 1.5),
-                                                                      horizontal_field_view=(-85/2, 85/2),
+                                                                      horizontal_field_view=(-85/2.0, 85/2.0),
                                                                       invert_z_axis=True)
 
             # result shape [ pgm_width, pgm_height, x,y,z, intensity, range, label]

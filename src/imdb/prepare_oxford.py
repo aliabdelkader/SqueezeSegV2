@@ -122,32 +122,13 @@ def cartesian_to_spherical(x, y, z):
     depth = np.sqrt(x ** 2 + y ** 2 + z ** 2)
 
     azimuth = np.arctan2(y, x)
-    elevation = np.arcsin(z / depth)
+    elevation = np.arctan2(z, depth)
 
     # transforms to degrees
     azimuth = np.rad2deg(azimuth)
     elevation = np.rad2deg(elevation)
 
     return azimuth, elevation, depth
-
-
-def shift_range(x, new_min=0., new_max=1., old_min=None, old_max=None):
-    """
-    function shift values in array from an old range to new range
-    Args:
-        x: input array
-        new_min: min value of new range
-        new_max: max value of new range
-        old_min: min value of input range
-        old_max: max value of input range
-    Returns:
-        normalize array
-    """
-    if old_max and old_min:
-        new_value = (new_max - new_min) / (old_max - old_min) * (x - old_max) + new_max
-    else:
-        new_value = (new_max - new_min) / (x.max() - x.min()) * (x - x.max()) + new_max
-    return new_value
 
 
 def get_pgm_index(lidar_data, pgm_height, pgm_width, vertical_field_view, horizontal_field_view, invert_z_axis=True):
@@ -178,9 +159,6 @@ def get_pgm_index(lidar_data, pgm_height, pgm_width, vertical_field_view, horizo
 
     # get spherical coordinates of points
     azimuth, elevation, depth = cartesian_to_spherical(x, y, z)
-
-    azimuth = shift_range(azimuth, new_min=vertical_field_view[0], new_max=vertical_field_view[1])
-    elevation = shift_range(elevation, new_min=horizontal_field_view[0], new_max=horizontal_field_view[1])
 
     vertical_step = (abs(vertical_field_view[0]) + abs(vertical_field_view[1])) / pgm_height
     horizontal_step = (abs(horizontal_field_view[0]) + abs(horizontal_field_view[1])) / pgm_width

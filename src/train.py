@@ -43,7 +43,7 @@ tf.app.flags.DEFINE_integer('summary_step', 50,
 tf.app.flags.DEFINE_integer('checkpoint_step', 1000,
                             """Number of steps to save summary.""")
 tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
-tf.app.flags.DEFINE_string('checkpoint_path',
+tf.app.flags.DEFINE_string('checkpoint_path', None,
                             """Path to the pretrained checkpoint.""")
 
 def train():
@@ -120,7 +120,14 @@ def train():
     sess.run(init)
 
     if FLAGS.checkpoint_path:
-        saver.restore(sess, FLAGS.checkpoint_path)
+        excluded_scopes_from_pretrained = ["conv14_prob", "bilateral_filter", "recurrent_crf"]
+        vars_to_restore_dict = {}
+        for var in tf.all_variables():
+            contains_list = [var.name for i in excluded_scopes_from_pretrained if i in var.name]
+            if len(contains_list) == 0:
+                vars_to_restore_dict[var.name[:-2]] = var
+        restorer = tf.train.Saver(vars_to_restore_dict)
+        restorer.restore(sess, FLAGS.checkpoint_path)
 
 
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)

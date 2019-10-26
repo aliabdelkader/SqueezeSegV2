@@ -166,8 +166,8 @@ def get_pgm_index(lidar_data, pgm_height, pgm_width, vertical_field_view, horizo
     vertical_range = np.arange(vertical_field_view[0], vertical_field_view[1], vertical_step)
     horizontal_range = np.arange(horizontal_field_view[0], horizontal_field_view[1], horizontal_step)
 
-    elevation_diff = np.abs(elevation.reshape(-1, 1) - vertical_range.reshape(1, -1))
-    azimuth_diff = np.abs(azimuth.reshape(-1, 1) - horizontal_range.reshape(1, -1))
+    azimuth_diff = (azimuth.reshape(-1, 1) - horizontal_range.reshape(1, -1)) ** 2
+    elevation_diff = (elevation.reshape(-1, 1) - vertical_range.reshape(1, -1)) ** 2
 
     pgm_azimuth_idx = np.argmin(azimuth_diff, axis=1).squeeze()
     pgm_elevation_idx = np.argmin(elevation_diff, axis=1).squeeze()
@@ -222,7 +222,7 @@ def main():
 
         print("number of scans after removing glare is {num}".format(num=len(scans_names)))
 
-        for scan_num in tqdm(scans_names):
+        for scan_num in tqdm(scans_names, "processing scans"):
 
             # read lidar scan
             lidar_scan_path = root_dataset_dir / FOLDERS["lidar_scan_folder"] / (

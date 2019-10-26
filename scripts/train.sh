@@ -57,7 +57,7 @@ export NET="squeezeSeg"
 export IMAGE_SET="train"
 export LOG_DIR="./log/"
 export STEPS=50000
-export PRETRAINED_PATH="./amr_pretrained/"
+export PRETRAINED_PATH="./amr_pretrained/model.ckpt-49999"
 
 logdir="$LOG_DIR/"
 

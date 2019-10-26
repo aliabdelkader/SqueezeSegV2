@@ -43,6 +43,8 @@ tf.app.flags.DEFINE_integer('summary_step', 50,
 tf.app.flags.DEFINE_integer('checkpoint_step', 1000,
                             """Number of steps to save summary.""")
 tf.app.flags.DEFINE_string('gpu', '0', """gpu id.""")
+tf.app.flags.DEFINE_string('checkpoint_path',
+                            """Path to the pretrained checkpoint.""")
 
 def train():
   """Train SqueezeSeg model"""
@@ -110,12 +112,15 @@ def train():
           sess.run(model.enqueue_op, feed_dict=feed_dict)
 
     saver = tf.train.Saver(tf.all_variables(), max_to_keep=10000)
+
     summary_op = tf.summary.merge_all()
     init = tf.initialize_all_variables()
 
     sess = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
     sess.run(init)
-    # saver.restore(sess, './log/train/model.ckpt-1500')
+
+    if FLAGS.checkpoint_path:
+        saver.restore(sess, FLAGS.checkpoint_path)
 
 
     summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph)

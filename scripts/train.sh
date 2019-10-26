@@ -57,6 +57,7 @@ export NET="squeezeSeg"
 export IMAGE_SET="train"
 export LOG_DIR="./log/"
 export STEPS=50000
+export PRETRAINED_PATH="./amr_pretrained/"
 
 logdir="$LOG_DIR/"
 
@@ -70,4 +71,5 @@ python ./src/train.py \
   --max_steps=$STEPS \
   --summary_step=10 \
   --checkpoint_step=100 \
-  --gpu=$GPUID
+  --gpu=$GPUID \
+  --checkpoint_path="${PRETRAINED_PATH}"

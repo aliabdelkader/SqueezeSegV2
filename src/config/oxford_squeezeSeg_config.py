@@ -55,7 +55,7 @@ def oxford_squeezeSeg_config():
 
   mc.BATCH_SIZE         = 40
   mc.AZIMUTH_LEVEL      = 512
-  mc.ZENITH_LEVEL       = 4
+  mc.ZENITH_LEVEL       = 64
 
   mc.FOCAL_GAMMA        = 2.0
   mc.LCN_HEIGHT         = 3

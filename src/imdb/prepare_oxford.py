@@ -160,8 +160,8 @@ def get_pgm_index(lidar_data, pgm_height, pgm_width, vertical_field_view, horizo
     # get spherical coordinates of points
     azimuth, elevation, depth = cartesian_to_spherical(x, y, z)
 
-    vertical_step = (abs(vertical_field_view[0]) + abs(vertical_field_view[1])) / pgm_height
-    horizontal_step = (abs(horizontal_field_view[0]) + abs(horizontal_field_view[1])) / pgm_width
+    vertical_step = (abs(vertical_field_view[0]) + abs(vertical_field_view[1])) / (pgm_height-1)
+    horizontal_step = (abs(horizontal_field_view[0]) + abs(horizontal_field_view[1])) / (pgm_width-1)
 
     vertical_range = np.arange(vertical_field_view[0], vertical_field_view[1], vertical_step)
     horizontal_range = np.arange(horizontal_field_view[0], horizontal_field_view[1], horizontal_step)

@@ -248,12 +248,16 @@ def main():
             # result shape [ pgm_width, pgm_height, x,y,z, intensity, range, label]
             result = np.zeros((pgm_height, pgm_width, 6), dtype=np.float)
 
+            result[pgm_azimuth, pgm_elevation, :3] = lidar_scan_data[:, :3]
+            result[pgm_azimuth, pgm_elevation, 3] = 0
+            result[pgm_azimuth, pgm_elevation, 4] = depth
+            
             for idx in range(lidar_scan_data.shape[0]):
                 pgm_azimuth_idx = pgm_azimuth[idx]
                 pgm_elevation_idx = pgm_elevation[idx]
-                result[pgm_elevation_idx, pgm_azimuth_idx, :3] = lidar_scan_data[idx, :3]
-                result[pgm_elevation_idx, pgm_azimuth_idx, 3] = 0  # intensity = 0
-                result[pgm_elevation_idx, pgm_azimuth_idx, 4] = depth[idx]
+            #     result[pgm_elevation_idx, pgm_azimuth_idx, :3] = lidar_scan_data[idx, :3]
+            #     result[pgm_elevation_idx, pgm_azimuth_idx, 3] = 0  # intensity = 0
+            #     result[pgm_elevation_idx, pgm_azimuth_idx, 4] = depth[idx]
                 result[pgm_elevation_idx, pgm_azimuth_idx, 5] = convert_ground_truth(lidar_labels_data[idx][0])
 
             # save file

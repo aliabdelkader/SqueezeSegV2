@@ -66,7 +66,7 @@ def main():
         print(str(train_chunk))
         # find lidar scans
         lidar_scans = train_chunk.glob("*.npy")
-        for scan in tqdm(lidar_scans):
+        for scan in tqdm(lidar_scans, "loading data for imageset creation"):
             file_all_content.append(scan.stem)
             file_train_content.append(scan.stem)
             shutil.copy(str(scan), str(lidar_2d_path))

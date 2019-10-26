@@ -82,20 +82,22 @@ def oxford_squeezeSeg_config():
 
   # run calculate_stats to get this data
 
-# x mean 0.0829980246484
-# y mean 0.00496859145238
-# z mean 0.00413414090863
+# x mean 2.06482801162
+# y mean 0.241372171864
+# z mean -0.00812007487582
 # intensity mean 0.0
-# range mean 0.0948401447068
-# x std 1.22129704996
-# y std 0.590271410875
-# z std 0.0734143687346
+# range mean 2.22553186239
+# x std 7.31851099943
+# y std 2.76561508229
+# z std 0.285247201667
 # intensity std 0.0
-# range std 1.3576863737
+# range std 7.78841736852
+
+
 
 # intensity set to 1e-5 to avoid divide by zero
   
-  mc.INPUT_MEAN         = np.array([[[0.83, 0.005, 0.004, 1e-5, 0.09]]])
-  mc.INPUT_STD          = np.array([[[1.22,0.59, 0.073, 1e-5, 1.357]]])
+  mc.INPUT_MEAN         = np.array([[[2.06, 0.241, -0.008, 1e-5, 2.225]]])
+  mc.INPUT_STD          = np.array([[[7.31, 2.76, 0.28, 1e-5, 7.788]]])
 
   return mc
